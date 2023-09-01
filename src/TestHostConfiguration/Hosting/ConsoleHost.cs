@@ -4,7 +4,7 @@ using Serilog;
 
 namespace TestHostConfiguration.Hosting;
 
-public static class MyHost
+public static class ConsoleHost
 {
     /// <summary>
     /// Create a customized <see cref="HostApplicationBuilder"/>.
@@ -24,7 +24,6 @@ public static class MyHost
         var builder = new HostApplicationBuilder(builderSettings);
 
         // Let Serilog take over logging responsibilities.
-        //builder.Logging.UseSerilog(builderSettings.Configuration, ConfigureSerilog);
         builder.UseSerilog(ConfigureSerilog);
 
         return builder;

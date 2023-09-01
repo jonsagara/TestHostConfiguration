@@ -8,7 +8,7 @@ Log.Logger = new LoggerConfiguration()
 
 try
 {
-    var builder = MyHost.CreateApplicationBuilder(args);
+    var builder = ConsoleHost.CreateApplicationBuilder(args);
 
     var host = builder.Build();
     host.Run();

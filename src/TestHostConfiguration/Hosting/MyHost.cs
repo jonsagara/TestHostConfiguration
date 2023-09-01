@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Sagara.Core.Logging.Serilog;
 using Serilog;
 
 namespace TestHostConfiguration.Hosting;
@@ -54,8 +53,7 @@ public static class MyHost
         loggerConfig
             .ReadFrom.Configuration(config)
             .ReadFrom.Services(services)
-            .Enrich.With<UtcTimestampEnricher>()
             .WriteTo.Console()
-            .WriteTo.File(logFilePathFormat, outputTemplate: "{UtcTimestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level}] [{SourceContext:l}] {Message}{NewLine}{Exception}", rollingInterval: RollingInterval.Day);
+            .WriteTo.File(logFilePathFormat, outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level}] [{SourceContext:l}] {Message}{NewLine}{Exception}", rollingInterval: RollingInterval.Day, retainedFileTimeLimit: TimeSpan.FromDays(7.0));
     }
 }

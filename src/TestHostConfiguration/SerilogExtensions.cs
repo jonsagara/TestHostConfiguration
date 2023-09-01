@@ -30,12 +30,8 @@ public static class SerilogExtensions
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(configureLogger);
 
-        IConfiguration config2 = config;
-
-        builder.Services.AddSerilog((serviceProvider, loggerConfiguration) =>
-            {
-                configureLogger(config2, serviceProvider, loggerConfiguration);
-            },
+        builder.Services.AddSerilog(
+            (serviceProvider, loggerConfiguration) => configureLogger(config, serviceProvider, loggerConfiguration),
             preserveStaticLogger: preserveStaticLogger,
             writeToProviders: writeToProviders
             );
@@ -65,10 +61,8 @@ public static class SerilogExtensions
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(configureLogger);
 
-        IConfiguration config2 = builder.Configuration;
-
         builder.Services.AddSerilog(
-            (serviceProvider, loggerConfiguration) => configureLogger(config2, serviceProvider, loggerConfiguration),
+            (serviceProvider, loggerConfiguration) => configureLogger(builder.Configuration, serviceProvider, loggerConfiguration),
             preserveStaticLogger: preserveStaticLogger,
             writeToProviders: writeToProviders
             );

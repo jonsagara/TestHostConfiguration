@@ -24,7 +24,8 @@ public static class MyHost
         var builder = new HostApplicationBuilder(builderSettings);
 
         // Let Serilog take over logging responsibilities.
-        builder.Logging.UseSerilog(builderSettings.Configuration, ConfigureSerilog);
+        //builder.Logging.UseSerilog(builderSettings.Configuration, ConfigureSerilog);
+        builder.UseSerilog(ConfigureSerilog);
 
         return builder;
     }
